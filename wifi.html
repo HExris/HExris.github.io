@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<title>HExris's Home</title>
+	<link rel="stylesheet" href="./weather.css">
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			box-sizing: border-box;
+			margin: 0;
+		}
+
+		body {
+			transition: all .8s ease;
+			padding-top: 80px;
+			background-color: #f1f1f1;
+		}
+
+		.wrapper{
+			padding-top: 10px;
+		}
+
+		@keyframes flashBlack {
+			50% {
+				color: #000;
+				background: #000;
+				-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+				box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+			}
+		}
+
+		@keyframes flashWhite {
+			50% {
+				color: #000;
+				background: #fff;
+				-webkit-box-shadow: 0 3px 8px rgba(255, 255, 255, .8);
+				box-shadow: 0 3px 8px rgba(255, 255, 255, .8);
+			}
+		}
+
+		@keyframes bounce {
+
+			from,
+			20%,
+			53%,
+			80%,
+			to {
+				animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				transform: translate3d(0, 0, 0);
+			}
+
+			40%,
+			43% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -30px, 0);
+			}
+
+			70% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -15px, 0);
+			}
+
+			90% {
+				transform: translate3d(0, -4px, 0);
+			}
+		}
+
+		@-webkit-keyframes bounce {
+
+			from,
+			20%,
+			53%,
+			80%,
+			to {
+				animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				transform: translate3d(0, 0, 0);
+			}
+
+			40%,
+			43% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -30px, 0);
+			}
+
+			70% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -15px, 0);
+			}
+
+			90% {
+				transform: translate3d(0, -4px, 0);
+			}
+		}
+
+		@-moz-keyframes bounce {
+
+			from,
+			20%,
+			53%,
+			80%,
+			to {
+				animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				transform: translate3d(0, 0, 0);
+			}
+
+			40%,
+			43% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -30px, 0);
+			}
+
+			70% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -15px, 0);
+			}
+
+			90% {
+				transform: translate3d(0, -4px, 0);
+			}
+		}
+
+		@keyframes bounce {
+
+			from,
+			20%,
+			53%,
+			80%,
+			to {
+				animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				transform: translate3d(0, 0, 0);
+			}
+
+			40%,
+			43% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -30px, 0);
+			}
+
+			70% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -15px, 0);
+			}
+
+			90% {
+				transform: translate3d(0, -4px, 0);
+			}
+		}
+
+		span {
+			/* animation: bounce 2s; */
+			transition: all 1s ease;
+			margin-top: 10px;
+			display: inline-block;
+		}
+
+		.flash {
+			display: inline-block;
+			width: 1px;
+			height: 26px;
+			background-color: transparent;
+			animation: flashBlack 1.5s linear infinite;
+			margin: 10px 8px 0;
+			transform: translateY(8px);
+		}
+
+		.btn {
+			-webkit-appearance: none;
+			border: 0;
+			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+			background-color: #eee;
+			padding: 5px 10px;
+			border-radius: 5px;
+			margin: 10px 0 10px 0;
+			font-family: "microsoft yahei";
+			cursor: pointer;
+		}
+
+		.header {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			background-color: rgb(47, 60, 79);
+			/* #263238; */
+			color: rgb(245, 245, 245);
+			padding: 25px;
+		}
+
+		.header h2 {
+			font-family: "microsoft yahei";
+			font-size: 24px;
+			font-weight: bold;
+			color: #fff;
+			margin: 0;
+		}
+
+		#author {
+			font-size: 16px;
+			color: #fff;
+			position: fixed;
+			bottom: 15px;
+			right: 15px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<h2>HExris's Network Center</h2>
+	</div>
+	<div class="wrapper">
+		<div id="scene" data-relative-input="true" data-pointer-events='true' data-friction-x="0.1"
+			data-friction-y="0.1" data-scalar-x="25" data-scalar-y="15">
+			<span id="flash" class="flash"></span>
+		</div>
+	</div>
+	<div class="container">
+		<!-- <div class="sunny"></div> 
+		<div class="cloudy"></div>
+		<div class="rainy"></div>
+		<div class="snowy"></div>
+		<div class="rainbow"></div>
+		<div class="starry"></div>
+		<div class="stormy"></div> -->
+	</div>
+	<div id="author">Powered by HExris</div>
+
+
+	<script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0-0/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+
+	<script type="text/javascript">
+		(function () {
+			var clipboard = new Clipboard('.btn')
+			var secret = "Welcome to my home ! ;ヾ(≧▽≦*)o;;;Wi-Fi账号：Huams;Wi-Fi密码：$  ",
+				secretIndex = 0,
+				index = 0,
+				sentenceIndex = 0,
+				scene = document.getElementById("scene"),
+				flash = document.getElementById("flash");
+			var scene = document.getElementById('scene');
+
+			function create(element) {
+				return document.createElement(element)
+			}
+			function setBodyCSS(attributes, style) {
+				var element = document.body
+				element.style[attributes] = style
+			}
+			var instance = axios.create({
+				baseURL: 'http://www.tianqiapi.com'
+			});
+			const queryweather = '/api?version=v6&appid=33872376&appsecret=z7F1i0Hw&city=昆明'
+			const weather = {
+				xue: 'snowy', // 雪
+				lei: 'stormy', // 暴风雨
+				shachen: 'stormy', // 沙尘
+				wu: 'cloudy', // 雾
+				bingbao: 'snowy', // 冰雹
+				yun: 'cloudy', // 云
+				yu: 'rainy', // 雨 
+				yin: 'cloudy', // 阴天
+				qing: 'sunny' // 晴天
+			}
+			instance.get(queryweather).then(res => {
+				console.log(res)
+				let weatherDOM = create('div')
+				let weatherContainer = document.querySelector('.container')
+				weatherDOM.setAttribute('class', weather[res.data.wea_img])
+				weatherContainer.appendChild(weatherDOM)
+			})
+			setTimeout(function () {
+				setBodyCSS("backgroundColor", "rgb(55, 72, 91)")
+				setBodyCSS("color", "#f5f5f5")
+				setBodyCSS("padding", "80px 25px 25px")
+				setBodyCSS("fontFamily", "microsoft yahei")
+				setBodyCSS("fontSize", "18px")
+
+				flash.style.animationName = 'flashWhite'
+				flash.style.width = '2px'
+				var sayTimer = setInterval(function () {
+					const inputWords = secret.charAt(secretIndex)
+					if (!inputWords) {
+						clearInterval(sayTimer)
+					}
+					if (secretIndex < secret.length) {
+						if (inputWords == ";") {
+							var word = create("br")
+							word.setAttribute('data-depth', "0.7")
+							scene.insertBefore(word, flash)
+						} else if (inputWords == "$") {
+							var btn = create("span")
+							btn.innerHTML = "<button class='btn' data-clipboard-text='HExris0818' style='animationName : zoomInUp; animationDuration = 1s;'>复制密码</button>"
+							btn.setAttribute('data-depth', "0.7")
+							scene.insertBefore(btn, flash)
+						} else {
+							var word = create("span")
+							if (inputWords === ' ') {
+								word.style.width = '10px'
+							}
+							word.innerText = inputWords
+							word.setAttribute('data-depth', "0.7")
+							scene.insertBefore(word, flash)
+						}
+						secretIndex++
+					}
+				}, 30)
+			}, 1000)
+		})()
+	</script>
+</body>
+
+</html>

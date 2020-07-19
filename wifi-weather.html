@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<title>HExris's Home</title>
+	<link rel="stylesheet" href="./weather.css">
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			box-sizing: border-box;
+			margin: 0;
+		}
+
+		body {
+			transition: all .8s ease;
+			padding-top: 80px;
+		}
+
+		@keyframes flashBlack {
+			50% {
+				color: #000;
+				background: #000;
+				-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+				box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+			}
+		}
+
+		@keyframes flashWhite {
+			50% {
+				color: #000;
+				background: #fff;
+				-webkit-box-shadow: 0 3px 8px rgba(255, 255, 255, .8);
+				box-shadow: 0 3px 8px rgba(255, 255, 255, .8);
+			}
+		}
+
+		@keyframes bounce {
+
+			from,
+			20%,
+			53%,
+			80%,
+			to {
+				animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				transform: translate3d(0, 0, 0);
+			}
+
+			40%,
+			43% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -30px, 0);
+			}
+
+			70% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -15px, 0);
+			}
+
+			90% {
+				transform: translate3d(0, -4px, 0);
+			}
+		}
+
+		@-webkit-keyframes bounce {
+
+			from,
+			20%,
+			53%,
+			80%,
+			to {
+				animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				transform: translate3d(0, 0, 0);
+			}
+
+			40%,
+			43% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -30px, 0);
+			}
+
+			70% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -15px, 0);
+			}
+
+			90% {
+				transform: translate3d(0, -4px, 0);
+			}
+		}
+
+		@-moz-keyframes bounce {
+
+			from,
+			20%,
+			53%,
+			80%,
+			to {
+				animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				transform: translate3d(0, 0, 0);
+			}
+
+			40%,
+			43% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -30px, 0);
+			}
+
+			70% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -15px, 0);
+			}
+
+			90% {
+				transform: translate3d(0, -4px, 0);
+			}
+		}
+
+		@keyframes bounce {
+
+			from,
+			20%,
+			53%,
+			80%,
+			to {
+				animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				transform: translate3d(0, 0, 0);
+			}
+
+			40%,
+			43% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -30px, 0);
+			}
+
+			70% {
+				animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+				transform: translate3d(0, -15px, 0);
+			}
+
+			90% {
+				transform: translate3d(0, -4px, 0);
+			}
+		}
+
+		span {
+			/* animation: bounce 2s; */
+			transition: all 1s ease;
+			margin-top: 10px;
+			display: inline-block;
+		}
+
+		.flash {
+			display: inline-block;
+			width: 1px;
+			height: 26px;
+			background-color: transparent;
+			animation: flashBlack 1.5s linear infinite;
+			margin: 0 8px;
+		}
+
+		.btn {
+			-webkit-appearance: none;
+			border: 0;
+			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+			background-color: #eee;
+			padding: 5px 10px;
+			border-radius: 5px;
+			margin: 10px 0 10px 0;
+			font-family: "microsoft yahei";
+			cursor: pointer;
+		}
+
+		.header {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			background-color: rgb(38, 50, 56);
+			color: rgb(245, 245, 245);
+			padding: 25px;
+			font-family: "microsoft yahei";
+			font-size: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">HExris's Network Center</div>
+	<div class="wrapper">
+		<div id="scene" data-relative-input="true" data-pointer-events='true' data-friction-x="0.1"
+			data-friction-y="0.1" data-scalar-x="25" data-scalar-y="15">
+			<span id="flash" class="flash"></span>
+		</div>
+		<div class="container">
+			<div class="sunny"></div>
+			<div class="cloudy"></div>
+			<div class="rainy"></div>
+			<div class="snowy"></div>
+			<div class="rainbow"></div>
+			<div class="starry"></div>
+			<div class="stormy"></div>
+		</div>
+	</div>
+
+
+	<script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0-0/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+
+	<script type="text/javascript">
+		(function () {
+			var clipboard = new Clipboard('.btn')
+			var secret = "Welcome to my home ! ;ヾ(≧▽≦*)o;;;无线网络账号：Huams;;无线网络密码：$  ",
+				secretIndex = 0,
+				index = 0,
+				sentenceIndex = 0,
+				scene = document.getElementById("scene"),
+				flash = document.getElementById("flash");
+			var scene = document.getElementById('scene');
+
+			function create(element) {
+				return document.createElement(element)
+			}
+			function setBodyCSS(attributes, style) {
+				var element = document.body
+				element.style[attributes] = style
+			}
+			var axiosInstance = axios.create({
+				baseURL: 'http://api.openweathermap.org'
+			});
+			const city = 'Shenzhen'
+			const appid = '7a1e410e4de30286e306164b4e1d2992'
+			const queryweather = `/data/2.5/weather?q=${city}&appid=${appid}`
+			const weather = {
+				'Clear': 'sunny',
+				'Mist': 'cloudy', // 多云
+				'Smoke': 'cloudy', // 雾
+				'Haze': 'cloudy', // 阴霾
+				'Dust': 'cloudy', // 沙尘
+				'Fog': 'cloudy', // 砂
+				'Sand': 'cloudy', // 灰
+				'Thunderstorm': 'stormy',// 雷雨
+				'Squall': 'stormy',// 龙卷风
+				'Tornado': 'stormy',// 飑
+				'Drizzle': 'rainy',// 雨
+				'Rain': 'rainy',// 雨
+				'Snow': 'snowy', //雪
+				//  : rainbow // 彩虹
+				'Night': 'starry' // 夜晚
+			}
+			const weatherCode = {
+				200: 'Thunderstorm',
+				201: 'Thunderstorm',
+				202: 'Thunderstorm',
+				210: 'Thunderstorm',
+				211: 'Thunderstorm',
+				212: 'Thunderstorm',
+				221: 'Thunderstorm',
+				230: 'Thunderstorm',
+				231: 'Thunderstorm',
+				232: 'Thunderstorm',
+				300: 'Drizzle',
+				301: 'Drizzle',
+				302: 'Drizzle',
+				310: 'Drizzle',
+				311: 'Drizzle',
+				312: 'Drizzle',
+				313: 'Drizzle',
+				314: 'Drizzle',
+				321: 'Drizzle',
+				500: 'Rain',
+				501: 'Rain',
+				502: 'Rain',
+				503: 'Rain',
+				504: 'Rain',
+				511: 'Rain',
+				520: 'Rain',
+				521: 'Rain',
+				522: 'Rain',
+				531: 'Rain',
+				600: 'Snow',
+				601: 'Snow',
+				602: 'Snow',
+				611: 'Snow',
+				612: 'Snow',
+				613: 'Snow',
+				615: 'Snow',
+				616: 'Snow',
+				620: 'Snow',
+				621: 'Snow',
+				622: 'Snow',
+				701: 'Mist',
+				711: 'Smoke',
+				721: 'Haze',
+				731: 'Dust',
+				741: 'Fog',
+				751: 'Sand',
+				761: 'Dust',
+				762: 'Ash',
+				771: 'Squall',
+				781: 'Tornado',
+				800: 'Clear',
+				801: 'Clouds',
+				802: 'Clouds',
+				803: 'Clouds',
+				804: 'Clouds',
+			}
+
+			axiosInstance.get(queryweather).then(res => {
+				console.log(res)
+				let weatherDOM = create('div')
+				let weatherContainer = document.querySelector('container')
+				weatherDOM.setAttribute('class', weather[res.data[0].weather])
+				console.log(weatherDOM)
+				weatherContainer.appendChild(weatherDOM)
+			})
+			setTimeout(function () {
+				setBodyCSS("backgroundColor", "#263238")
+				setBodyCSS("color", "#f5f5f5")
+				setBodyCSS("padding", "80px 25px 25px")
+				setBodyCSS("fontFamily", "microsoft yahei")
+				setBodyCSS("fontSize", "20px")
+
+				flash.style.animationName = 'flashWhite'
+				flash.style.width = '2px'
+				var sayTimer = setInterval(function () {
+					const inputWords = secret.charAt(secretIndex)
+					if (!inputWords) {
+						clearInterval(sayTimer)
+					}
+					if (secretIndex < secret.length) {
+						if (inputWords == ";") {
+							var word = create("br")
+							word.setAttribute('data-depth', "0.7")
+							scene.insertBefore(word, flash)
+						} else if (inputWords == "$") {
+							var btn = create("span")
+							btn.innerHTML = "<button class='btn' data-clipboard-text='HExris0818' style='animationName : zoomInUp; animationDuration = 1s;'>复制密码</button>"
+							btn.setAttribute('data-depth', "0.7")
+							scene.insertBefore(btn, flash)
+						} else {
+							var word = create("span")
+							if (inputWords === ' ') {
+								word.style.width = '10px'
+							}
+							word.innerText = inputWords
+							word.setAttribute('data-depth', "0.7")
+							scene.insertBefore(word, flash)
+						}
+						secretIndex++
+					}
+				}, 30)
+			}, 1000)
+		})()
+	</script>
+</body>
+
+</html>
