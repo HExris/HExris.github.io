@@ -79,6 +79,7 @@
 				setBodyCSS("backgroundColor", "rgb(55, 72, 91)")
 				setBodyCSS("color", "#DDDDDD")
 				setBodyCSS("padding", "80px 25px 25px")
+				setBodyCSS("fontFamily", "microsoft yahei")
 				setBodyCSS("fontSize", "16px")
 
 				flash.style.animationName = 'flashWhite'
@@ -91,12 +92,10 @@
 					if (secretIndex < secret.length) {
 						if (inputWords == ";") {
 							var word = create("br")
-							word.setAttribute('data-depth', "0.7")
 							scene.insertBefore(word, flash)
 						} else if (inputWords == "$") {
 							var btn = create("span")
 							btn.innerHTML = "<button class='btn' data-clipboard-text='HExris0818' style='animationName : zoomInUp; animationDuration = 1s;'>复制密码</button>"
-							btn.setAttribute('data-depth', "0.7")
 							scene.insertBefore(btn, flash)
 						} else {
 							var word = create("span")
@@ -104,7 +103,6 @@
 								word.style.width = '10px'
 							}
 							word.innerText = inputWords
-							word.setAttribute('data-depth', "0.7")
 							scene.insertBefore(word, flash)
 						}
 						secretIndex++
