@@ -70,10 +70,42 @@ const Weather = {
 
 // 复制按钮
 const ClipboardButton = {
-    template: `<button class='btn' :data-clipboard-text='password' style='animationName : zoomInUp; animationDuration = 1s;'>复制密码</button>`,
+    template: `<button class='btn' style='animationName : zoomInUp; animationDuration = 1s;' @click="copyPassword">复制密码</button>`,
     data() {
         return {
-            password: 'HExris0818'
+            password: 'HExris0818',
+            hiddenTimestamp: null,
+            timer: null
+        }
+    },
+    methods: {
+        copyPassword() {
+            var copyText = document.querySelector("input");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            this.showTips()
+        },
+        showTips() {
+            let tips = document.querySelector('.tips')
+
+            // 定时隐藏Tips
+            if (!this.timer) {
+                this.timer = setInterval(() => {
+                    if (this.hiddenTimestamp < new Date()) {
+                        document.querySelector('.tips').setAttribute('class', 'tips')
+                    }
+                }, 16)
+            }
+
+            // 元素隐藏状态
+            if (this.hiddenTimestamp < new Date().getTime() || !this.hiddenTimestamp) {
+                tips.setAttribute('class', 'tips active')
+                this.hiddenTimestamp = new Date().getTime() + 3000
+            // 元素显示状态
+            } else {
+                this.hiddenTimestamp = new Date().getTime() + 3000
+            }
         }
     }
 }
@@ -136,16 +168,6 @@ const scene = {
         setBodyCSS(attributes, style) {
             var element = document.body
             element.style[attributes] = style
-        },
-        showTips() {
-            alert(1)
-            function create(element) {
-                return document.createElement(element)
-            }
-            let tips = create('div')
-            tips.innerText = '复制成功'
-            tips.setAttribute('class', 'tips')
-            document.body.appendChild(tips)
         }
     }
 }
